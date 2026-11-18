@@ -5,6 +5,7 @@
 import { MONTHS as N, QUARTERS as Q, ROUNDS, monthLabel as dt } from "../constants.ts";
 import { rankWord, type RoundScore } from "../scoring.ts";
 import type { PublicTopic } from "../curves/types.ts";
+import { SITE_NAME } from "../site.ts";
 
 type Mode = "peak" | "free";
 type Reveal = { data: number[]; fact: string; score: RoundScore; crowd: { line: number[]; n: number } | null };
@@ -266,7 +267,7 @@ export function mountGame(root: HTMLElement): () => void {
 
   function shareText(total: number) {
     const lines = results.map((r) => r.reveal.score.slices.map((s) => (s.points >= 7 ? "🟩" : s.points >= 4 ? "🟨" : "🟥")).join("") + (r.reveal.score.peak >= 36 ? " 🎯" : ""));
-    return `Hype Line #${puzzleNo} · ${total}/500 📈\n${lines.join("\n")}\n${location.origin}`;
+    return `${SITE_NAME} #${puzzleNo} · ${total}/500 📈\n${lines.join("\n")}\n${location.origin}`;
   }
   function countdown() {
     const now = new Date(), next = new Date(now); next.setHours(24, 0, 0, 0);

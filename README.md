@@ -17,6 +17,8 @@ Open http://localhost:3000. The game works without a database; it just won't sav
 
 To turn those on, copy `.env.example` to `.env.local`, paste your Postgres connection string into `DATABASE_URL`, and run `npm run db:setup` once.
 
+The game's name is set in one place, `lib/site.ts`. The Cloudflare Worker name is `name` in `wrangler.jsonc` (it also sets the free `<name>.<your-account>.workers.dev` address).
+
 Other commands: `npm test` (scoring tests), `npm run typecheck`, `npm run build`.
 
 ## Deploy (Cloudflare Workers)

@@ -2,6 +2,11 @@
 // Markup for the game screen. All behavior lives in lib/game/engine.ts, which attaches to these ids.
 import { useEffect, useRef } from "react";
 import { mountGame } from "@/lib/game/engine.ts";
+import { SITE_NAME } from "@/lib/site.ts";
+
+const words = SITE_NAME.split(" ");
+const head = words.slice(0, -1).join(" ");
+const tail = words[words.length - 1];
 
 export default function Game() {
   const root = useRef<HTMLDivElement>(null);
@@ -11,7 +16,7 @@ export default function Game() {
     <div className="app" ref={root}>
       <div className="top">
         <div className="brand">
-          Hype<i>Line</i>
+          {head}<i>{tail}</i>
           <span className="proto" id="p-no"></span>
         </div>
         <div className="seg" role="radiogroup" aria-label="Drawing style">

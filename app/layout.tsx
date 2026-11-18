@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { SITE_DESCRIPTION, SITE_NAME } from "@/lib/site.ts";
 
 export const metadata: Metadata = {
-  title: "Hype Line",
-  description: "A daily guessing game: draw how much the world searched a topic, then watch the real line race over yours.",
+  title: SITE_NAME,
+  description: SITE_DESCRIPTION,
 };
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover" };
