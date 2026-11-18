@@ -1,0 +1,2 @@
+# For `npm run preview` (local Cloudflare runtime). Copy to .dev.vars. Optional.
+DATABASE_URL="postgres://user:password@host/dbname?sslmode=require"

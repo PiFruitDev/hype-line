@@ -1,0 +1,18 @@
+// Cloudflare Workers config. The "name" must match the Worker's name in the Cloudflare dashboard.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "hype-line",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-10-28",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    // Self-reference used by OpenNext; must match "name" above.
+    { "binding": "WORKER_SELF_REFERENCE", "service": "hype-line" }
+  ],
+  "observability": { "enabled": true }
+  // DATABASE_URL is a secret: set it in the dashboard (Settings > Variables and Secrets), not here.
+}

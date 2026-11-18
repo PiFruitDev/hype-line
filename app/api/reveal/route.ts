@@ -3,7 +3,7 @@
 import { QUARTERS, MONTHS, ROUNDS } from "@/lib/constants.ts";
 import { curveSource } from "@/lib/curves/index.ts";
 import { isValidDay } from "@/lib/day.ts";
-import { crowdLine, saveGuess } from "@/lib/db.ts";
+import { saveGuess } from "@/lib/db.ts";
 import { playerId } from "@/lib/player.ts";
 import { normalizeFreehand, scoreRound } from "@/lib/scoring.ts";
 
@@ -35,11 +35,10 @@ export async function POST(req: Request) {
   const topic = (await curveSource().getDay(day))[round];
   const score = scoreRound(topic.data, guess, peak);
 
-  let crowd: Awaited<ReturnType<typeof crowdLine>> = null;
+  let crowd: Awaited<ReturnType<typeof saveGuess>> = null;
   try {
     const pid = await playerId();
-    await saveGuess({ playerId: pid, day, round, topicId: topic.id, mode, vals: guess, peakMonth: peak, score: score.total });
-    crowd = await crowdLine(day, round);
+    crowd = await saveGuess({ playerId: pid, day, round, topicId: topic.id, mode, vals: guess, peakMonth: peak, score: score.total });
   } catch (e) {
     console.error("db error", e); // the game keeps working if the database is down
   }
